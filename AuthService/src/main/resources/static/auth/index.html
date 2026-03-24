@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Service</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+            color: #1f2933;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #d9e2ec;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        h1, h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 14px;
+            border: 1px solid #bcccdc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        pre {
+            margin-top: 20px;
+            padding: 14px;
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Auth Service</h1>
+    <p>Use these forms to call your existing signup and login APIs from the browser.</p>
+
+    <div class="grid">
+        <div class="card">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="signupName">Name</label>
+                <input id="signupName" type="text" required>
+
+                <label for="signupEmail">Email</label>
+                <input id="signupEmail" type="email" required>
+
+                <label for="signupPassword">Password</label>
+                <input id="signupPassword" type="password" required>
+
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" required>
+
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <pre id="result">Response will appear here.</pre>
+</div>
+
+<script>
+    const result = document.getElementById("result");
+
+    function showResult(title, body) {
+        result.textContent = title + "\n\n" + body;
+    }
+
+    async function sendJson(url, payload) {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const text = await response.text();
+        let formatted = text;
+
+        try {
+            formatted = JSON.stringify(JSON.parse(text), null, 2);
+        } catch (error) {
+            formatted = text;
+        }
+
+        if (!response.ok) {
+            throw new Error("Status " + response.status + "\n" + formatted);
+        }
+
+        return formatted;
+    }
+
+    document.getElementById("signupForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        try {
+            const body = await sendJson("/auth/signup", {
+                name: document.getElementById("signupName").value,
+                email: document.getElementById("signupEmail").value,
+                password: document.getElementById("signupPassword").value
+            });
+
+            showResult("Signup Success", body);
+        } catch (error) {
+            showResult("Signup Failed", error.message);
+        }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        try {
+            const body = await sendJson("/auth/login", {
+                email: document.getElementById("loginEmail").value,
+                password: document.getElementById("loginPassword").value
+            });
+
+            showResult("Login Success", body);
+        } catch (error) {
+            showResult("Login Failed", error.message);
+        }
+    });
+</script>
+</body>
+</html>
