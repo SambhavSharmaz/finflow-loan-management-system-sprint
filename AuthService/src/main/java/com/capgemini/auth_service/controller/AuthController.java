@@ -30,11 +30,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest request) {
-
         User user = service.login(request);
-
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
-
         return new AuthResponse(token, user.getRole());
     }
 }
