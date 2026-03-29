@@ -1,0 +1,167 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] eureka-server                                                      [jar]
+[INFO] gateway-service                                                    [jar]
+[INFO] auth-service                                                       [jar]
+[INFO] application-service                                                [jar]
+[INFO] document-service                                                   [jar]
+[INFO] admin-service                                                      [jar]
+[INFO] finflow-loan-management-system                                     [pom]
+[INFO] 
+[INFO] --------------------< com.capgemini:eureka-server >---------------------
+[INFO] Building eureka-server 0.0.1-SNAPSHOT                              [1/7]
+[INFO]   from EurekaServer\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ eureka-server ---
+[INFO] Deleting C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\EurekaServer\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ eureka-server ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ eureka-server ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 1 source file with javac [debug release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ eureka-server ---
+[INFO] skip non existing resourceDirectory C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\EurekaServer\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ eureka-server ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 1 source file with javac [debug release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.1.2:test (default-test) @ eureka-server ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.3.0:jar (default-jar) @ eureka-server ---
+[INFO] Building jar: C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\EurekaServer\target\eureka-server-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:3.2.5:repackage (repackage) @ eureka-server ---
+[INFO] Replacing main artifact C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\EurekaServer\target\eureka-server-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\EurekaServer\target\eureka-server-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] -------------------< com.capgemini:gateway-service >--------------------
+[INFO] Building gateway-service 0.0.1-SNAPSHOT                            [2/7]
+[INFO]   from Gateway\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ gateway-service ---
+[INFO] Deleting C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\Gateway\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ gateway-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ gateway-service ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 3 source files with javac [debug release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ gateway-service ---
+[INFO] skip non existing resourceDirectory C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\Gateway\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ gateway-service ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 1 source file with javac [debug release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.1.2:test (default-test) @ gateway-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.3.0:jar (default-jar) @ gateway-service ---
+[INFO] Building jar: C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\Gateway\target\gateway-service-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:3.2.5:repackage (repackage) @ gateway-service ---
+[INFO] Replacing main artifact C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\Gateway\target\gateway-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\Gateway\target\gateway-service-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] ---------------------< com.capgemini:auth-service >---------------------
+[INFO] Building auth-service 0.0.1-SNAPSHOT                               [3/7]
+[INFO]   from AuthService\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ auth-service ---
+[INFO] Deleting C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\AuthService\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ auth-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ auth-service ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 14 source files with javac [debug release 21] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[32,9] cannot find symbol
+  symbol:   variable log
+  location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[34,9] cannot find symbol
+  symbol:   variable log
+  location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[40,9] cannot find symbol
+  symbol:   variable log
+  location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[44,9] cannot find symbol
+  symbol:   variable log
+  location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/AuthServiceApplication.java:[31,17] cannot find symbol
+  symbol:   variable log
+  location: class com.capgemini.authservice.AuthServiceApplication
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/AuthServiceApplication.java:[32,17] cannot find symbol
+  symbol:   variable log
+  location: class com.capgemini.authservice.AuthServiceApplication
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/AuthServiceApplication.java:[33,17] cannot find symbol
+  symbol:   variable log
+  location: class com.capgemini.authservice.AuthServiceApplication
+[INFO] 7 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for finflow-loan-management-system 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] eureka-server ...................................... SUCCESS [  8.349 s]
+[INFO] gateway-service .................................... SUCCESS [  3.010 s]
+[INFO] auth-service ....................................... FAILURE [  1.657 s]
+[INFO] application-service ................................ SKIPPED
+[INFO] document-service ................................... SKIPPED
+[INFO] admin-service ...................................... SKIPPED
+[INFO] finflow-loan-management-system ..................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.787 s
+[INFO] Finished at: 2026-03-29T18:37:06+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project auth-service: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[32,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[34,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[40,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java:[44,9] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.capgemini.authservice.controller.AuthController
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/AuthServiceApplication.java:[31,17] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.capgemini.authservice.AuthServiceApplication
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/AuthServiceApplication.java:[32,17] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.capgemini.authservice.AuthServiceApplication
+[ERROR] /C:/Users/Sambhav/Downloads/FinFlow-Loan-Management-System/AuthService/src/main/java/com/capgemini/authservice/AuthServiceApplication.java:[33,17] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.capgemini.authservice.AuthServiceApplication
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :auth-service

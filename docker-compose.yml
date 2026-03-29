@@ -1,0 +1,141 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: finflow-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3037:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  zipkin:
+    image: openzipkin/zipkin:3.4
+    container_name: finflow-zipkin
+    restart: unless-stopped
+    ports:
+      - "9411:9411"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: finflow-rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  eureka-server:
+    build:
+      context: ./EurekaServer
+    container_name: finflow-eureka-server
+    restart: on-failure
+    environment:
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    ports:
+      - "9090:9090"
+    depends_on:
+      - zipkin
+
+  auth-service:
+    build:
+      context: ./AuthService
+    container_name: finflow-auth-service
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/auth_db?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      AUTH_JWT_SECRET: "01234567890123456789012345678901"
+      EUREKA_SERVER_URL: http://eureka-server:9090/eureka/
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+      - eureka-server
+      - zipkin
+
+  application-service:
+    build:
+      context: ./ApplicationService
+    container_name: finflow-application-service
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/application_db?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_SERVER_URL: http://eureka-server:9090/eureka/
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+      SPRING_RABBITMQ_HOST: rabbitmq
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql
+      - eureka-server
+      - zipkin
+      - rabbitmq
+
+  document-service:
+    build:
+      context: ./DocumentService
+    container_name: finflow-document-service
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/document_db?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      DOCUMENT_DROPBOX_FOLDER: /finflow
+      EUREKA_SERVER_URL: http://eureka-server:9090/eureka/
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+      SPRING_RABBITMQ_HOST: rabbitmq
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mysql
+      - eureka-server
+      - zipkin
+      - rabbitmq
+
+  admin-service:
+    build:
+      context: ./AdminService
+    container_name: finflow-admin-service
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/admin_db?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      APPLICATION_SERVICE_URL: http://application-service:8082
+      EUREKA_SERVER_URL: http://eureka-server:9090/eureka/
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+    ports:
+      - "8084:8084"
+    depends_on:
+      - mysql
+      - eureka-server
+      - zipkin
+
+  gateway-service:
+    build:
+      context: ./Gateway
+    container_name: finflow-gateway-service
+    restart: on-failure
+    environment:
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+      AUTH_SERVICE_URL: http://auth-service:8081
+      APPLICATION_SERVICE_URL: http://application-service:8082
+      DOCUMENT_SERVICE_URL: http://document-service:8083
+      ADMIN_SERVICE_URL: http://admin-service:8084
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - application-service
+      - document-service
+      - admin-service
+      - zipkin
+
+volumes:
+  mysql-data:

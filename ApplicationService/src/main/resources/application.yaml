@@ -1,16 +1,17 @@
 spring:
   application:
-    name: ApplicationService
+    name: application-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/application_db
-    username: root
-    password: root
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3037/application_db}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
 
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    open-in-view: false
+    show-sql: false
 
 server:
   port: 8082
@@ -18,4 +19,16 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9090/eureka/
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:9090/eureka/}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}

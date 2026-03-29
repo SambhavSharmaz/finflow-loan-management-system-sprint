@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: document-service
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3037/document_db}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8083
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:9090/eureka/}
+
+document:
+  dropbox:
+    access-token: "sl.u.AGYQbkaY0-Xd0cVMBxZbyB27Bcmu9dbG8oC0XzQdg1AfH8IXW9fEdyuVbKICj0Rf9ZmP5qckcM7pSLmQBfPaCG7xXwWN3_nzdsPN9QZ1-CSSC9jU3hYP-_ylhC-9VEo9cgZUD3zEZvA_G6yvuVu__487sad_NwdYnCr4IuMFsas5wdi4PG1nKQ8udraPIgqZBpWuXoO38lcaHdNfE8mQR8a-fMtb8o1jtNEGs2QsoY_650l8UTWfECcL7sjaalVQQJvTCsicQxs7HD3vm6bkxy9zaXQgS0QwLI_mHrFcPcRHxSojTRvwwfrha1BHBDh3IEGBSErfO4RoKB3l42bG6_W1FlRQ2agh2v-CtW1JYh8G0yDrQ5It5vx7wkgizObfMJi9-dPpjEojyr_qPknpkiEzBeO1yv44NvmlleFud0VqZ4DABbm01TDHSFvobaijcJ4OQ7o0pBYTGENt7iBCGoYp1TFLMIZ33TI_mmC3gZPgvFSKPmLlXZzy5zspISruLi9VUVrsAhVV2OhLE7X5G-SjCyvlAE8sc4o_N2Hd0Ic6XpK25Qz3FAlHcsCdn-YtDXd5ECGtGi4V9WT4ZIphh2oVQOsLusOA8Cl_KpEWGUrtU0rc7wfUYoq4Zr2wZh6mAPem0YibOhwII-erjoYxU_ag2sTDRzAAg1P5uDMpmqz2W9OdWnjphRJiKmk1j5LC5bR7auE4UrUZrDAY6T-lWsTFpytCz1TY7qZT_LCQg2AnFC7O1DY1OCyTwBwZ3nj96j8IBxuw76I_2wSx8sNT6t71D7jFTPRQ5HzuKGonpzoP2O0LDM__wrwoMFrwMSWY_PfnlZMO7HMyp2P0Y_Ri7d60LR-V18BgG8EiBJwN2JmPEGdzPiVyfHEvmmMHwRyejy9c9Z13Ka547rYMogfU48Cg0vtD2wbB1thy5G_O44qAU-1_RauvFn1_-i_gIA0CiFo4l2GZdtR9n2-zN_q3Gy5uiW2ZYXe4aEMRetZlnPzTQu8lAAxlnPscxz92IMlcA-0K97sZPV22WQv88dF9MfEstKLszLg0YkzcvtW8-2QmCl5CBxmzZc0GapA9UTHrmPbYQR4ahuxCUINWeqif9A-memmIjRNbEki5OWVLIFQ8B0F7zW7RdyY-WVp6AwFn8etKEH-SonSOlmsspHQmIVgil8l2ttJncmkpsSnGc0HrV_izilezx1PE2o7aC44KwEHxaHRWOBLSK_dQ_yY-6HbF7KHvTaITXTP0QYHrhXSmnaTnVrTK2b3Uo4kV01BsV4Oyqcghs62k5bk00MDZtcOfSn5WLGDSItmaC5KKaYyf3RE2YwVZFoAJN3Mnl2umxvF4RpyGcuDBJunlGZIWPiOrFzq4VT7LTggd_mETGjOkhJeYE7iUB8jThXUhGlCsBme6XiY6oebVILwO8wW3t-qyi_TXL6VbWOLd8d0R18VAiPAhWmXjf-otUXOA9audSaE"
+    folder: ${DOCUMENT_DROPBOX_FOLDER:/finflow}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+

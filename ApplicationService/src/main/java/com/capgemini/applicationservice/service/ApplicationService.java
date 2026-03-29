@@ -4,43 +4,90 @@ import com.capgemini.applicationservice.dto.ApplicationRequest;
 import com.capgemini.applicationservice.entity.LoanApplication;
 import com.capgemini.applicationservice.entity.Status;
 import com.capgemini.applicationservice.repository.LoanRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Locale;
+import java.util.NoSuchElementException;
 
 @Service
 public class ApplicationService {
 
-    @Autowired
-    private LoanRepository repo;
+    private LoanRepository loanRepository;
+
+    public ApplicationService(LoanRepository loanRepository) {
+        this.loanRepository = loanRepository;
+    }
 
     public LoanApplication create(ApplicationRequest request, String email) {
-        LoanApplication app = new LoanApplication();
-        app.setUserEmail(email);
-        app.setFullName(request.getFullName());
-        app.setPhone(request.getPhone());
-        app.setCompany(request.getCompany());
-        app.setSalary(request.getSalary());
-        app.setAmount(request.getAmount());
-        app.setTenure(request.getTenure());
-        app.setStatus(Status.DRAFT);
-        return repo.save(app);
+        LoanApplication loanApplication = new LoanApplication();
+        loanApplication.setUserEmail(email);
+        loanApplication.setFullName(request.getFullName());
+        loanApplication.setPhone(request.getPhone());
+        loanApplication.setCompany(request.getCompany());
+        loanApplication.setSalary(request.getSalary());
+        loanApplication.setAmount(request.getAmount());
+        loanApplication.setTenure(request.getTenure());
+        loanApplication.setPurpose(request.getPurpose());
+        loanApplication.setStatus(Status.DRAFT);
+        return loanRepository.save(loanApplication);
     }
 
     public LoanApplication submit(Long id) {
-        LoanApplication app = repo.findById(id)
-                .orElseThrow();
-        app.setStatus(Status.SUBMITTED);
-        return repo.save(app);
+        LoanApplication loanApplication = findApplicationById(id);
+        loanApplication.setStatus(Status.SUBMITTED);
+        return loanRepository.save(loanApplication);
     }
 
     public List<LoanApplication> getMyApps(String email) {
-        return repo.findByUserEmail(email);
+        return loanRepository.findByUserEmail(email);
+    }
+
+    public List<LoanApplication> getAllApps() {
+        return loanRepository.findAll();
     }
 
     public Status getStatus(Long id) {
-        return repo.findById(id)
-                .orElseThrow()
-                .getStatus();
+        return findApplicationById(id).getStatus();
+    }
+
+    public void updateStatus(Long id, String status) {
+        LoanApplication loanApplication = findApplicationById(id);
+        loanApplication.setStatus(parseStatus(status));
+        loanRepository.save(loanApplication);
+    }
+
+    public void delete(Long id) {
+        LoanApplication loanApplication = findApplicationById(id);
+        loanRepository.delete(loanApplication);
+    }
+
+    public LoanApplication update(Long id, ApplicationRequest request) {
+        LoanApplication loanApplication = findApplicationById(id);
+        loanApplication.setFullName(request.getFullName());
+        loanApplication.setPhone(request.getPhone());
+        loanApplication.setCompany(request.getCompany());
+        loanApplication.setSalary(request.getSalary());
+        loanApplication.setAmount(request.getAmount());
+        loanApplication.setTenure(request.getTenure());
+        loanApplication.setPurpose(request.getPurpose());
+        return loanRepository.save(loanApplication);
+    }
+
+    public long count() {
+        return loanRepository.count();
+    }
+
+    private LoanApplication findApplicationById(Long id) {
+        return loanRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Application not found."));
+    }
+
+    private Status parseStatus(String status) {
+        try {
+            return Status.valueOf(status.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException exception) {
+            throw new IllegalArgumentException("Invalid application status.");
+        }
     }
 }

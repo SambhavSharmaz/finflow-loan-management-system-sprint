@@ -1,22 +1,6 @@
 spring:
   application:
-    name: "gateway-service"
-
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: "http://localhost:9090/eureka/"
+    name: gateway-service
 
 server:
   port: 8080
@@ -25,28 +9,22 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
-  endpoint:
-    gateway:
-      enabled: true
-  info:
-    env:
-      enabled: true
+        include: health,info,gateway
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
 
-info:
-  app:
-    name: "Gateway Service"
-    description: "API Gateway for routing requests to microservices"
-    version: "1.0.0"
-
-resilience4j:
-  circuitbreaker:
-    instances:
-      sampleService:
-        registerHealthIndicator: true
-        slidingWindowSize: 5
-        minimumNumberOfCalls: 5
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10s
-        permittedNumberOfCallsInHalfOpenState: 3
-        eventConsumerBufferSize: 10
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Auth Service
+        url: /gateway/auth/v3/api-docs
+      - name: Application Service
+        url: /gateway/applications/v3/api-docs
+      - name: Document Service
+        url: /gateway/documents/v3/api-docs
+      - name: Admin Service
+        url: /gateway/admin/v3/api-docs
