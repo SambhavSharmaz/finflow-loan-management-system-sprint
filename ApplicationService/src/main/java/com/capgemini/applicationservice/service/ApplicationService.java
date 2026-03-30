@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 @Service
 public class ApplicationService {
 
-    private LoanRepository loanRepository;
+    private final LoanRepository loanRepository;
 
     public ApplicationService(LoanRepository loanRepository) {
         this.loanRepository = loanRepository;
@@ -84,6 +84,10 @@ public class ApplicationService {
     }
 
     private Status parseStatus(String status) {
+        if (status == null || status.isBlank()) {
+            throw new IllegalArgumentException("Application status is required.");
+        }
+
         try {
             return Status.valueOf(status.toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException exception) {

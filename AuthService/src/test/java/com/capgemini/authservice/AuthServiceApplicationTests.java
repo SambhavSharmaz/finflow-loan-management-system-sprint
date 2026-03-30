@@ -25,6 +25,7 @@ import org.springframework.test.context.ActiveProfiles;
         "spring.datasource.password=",
         "spring.jpa.hibernate.ddl-auto=create-drop",
         "eureka.client.enabled=false",
+        "spring.cloud.discovery.enabled=false",
         "auth.jwt.secret=01234567890123456789012345678901",
         "spring.cloud.config.enabled=false",
         "spring.config.import="

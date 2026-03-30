@@ -47,7 +47,9 @@ public class AuthControllerTest {
         signupRequest.setEmail("test@example.com");
         signupRequest.setPassword("password123");
         signupRequest.setName("Test User");
-        Mockito.doNothing().when(authService).register(any(SignupRequest.class));
+        User mockUser = new User();
+        mockUser.setEmail("test@example.com");
+        Mockito.when(authService.register(any(SignupRequest.class))).thenReturn(mockUser);
 
         mockMvc.perform(post("/auth/signup")
                 .contentType(MediaType.APPLICATION_JSON)

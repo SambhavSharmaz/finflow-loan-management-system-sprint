@@ -15,21 +15,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.core.RabbitOperations;
 
 @Service
 public class DocumentService {
 
     private final DocumentRepository documentRepository;
-    private RabbitTemplate rabbitTemplate;
-    private DbxClientV2 dbxClient;
-    private String dropboxFolder;
+    private final RabbitOperations rabbitTemplate;
+    private final DbxClientV2 dbxClient;
+    private final String dropboxFolder;
 
     public DocumentService(
             DocumentRepository documentRepository,
-            RabbitTemplate rabbitTemplate,
+            RabbitOperations rabbitTemplate,
             DbxClientV2 dbxClient,
             @Value("${document.dropbox.folder:/finflow}") String dropboxFolder) {
         this.documentRepository = documentRepository;
