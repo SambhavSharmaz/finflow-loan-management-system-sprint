@@ -1,0 +1,62 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] finflow-loan-management-system                                     [pom]
+[INFO] ConfigServer                                                       [jar]
+[INFO] 
+[INFO] ------------< com.capgemini:finflow-loan-management-system >------------
+[INFO] Building finflow-loan-management-system 0.0.1-SNAPSHOT             [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ finflow-loan-management-system ---
+[INFO] 
+[INFO] --- jacoco:0.8.11:prepare-agent (default) @ finflow-loan-management-system ---
+[INFO] argLine set to -javaagent:C:\\Users\\Sambhav\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.11\\org.jacoco.agent-0.8.11-runtime.jar=destfile=C:\\Users\\Sambhav\\Downloads\\FinFlow-Loan-Management-System\\target\\jacoco.exec
+[INFO] 
+[INFO] --- jacoco:0.8.11:report (report) @ finflow-loan-management-system ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- install:3.1.1:install (default-install) @ finflow-loan-management-system ---
+[INFO] Installing C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\pom.xml to C:\Users\Sambhav\.m2\repository\com\capgemini\finflow-loan-management-system\0.0.1-SNAPSHOT\finflow-loan-management-system-0.0.1-SNAPSHOT.pom
+[INFO] 
+[INFO] ---------------------< com.capgemini:ConfigServer >---------------------
+[INFO] Building ConfigServer 0.0.1-SNAPSHOT                               [2/2]
+[INFO]   from ConfigServer\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ ConfigServer ---
+[INFO] Deleting C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\ConfigServer\target
+[INFO] 
+[INFO] --- jacoco:0.8.11:prepare-agent (default) @ ConfigServer ---
+[INFO] argLine set to -javaagent:C:\\Users\\Sambhav\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.11\\org.jacoco.agent-0.8.11-runtime.jar=destfile=C:\\Users\\Sambhav\\Downloads\\FinFlow-Loan-Management-System\\ConfigServer\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ConfigServer ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ ConfigServer ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 1 source file with javac [debug release 21] to target\classes
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for finflow-loan-management-system 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] finflow-loan-management-system ..................... SUCCESS [  1.282 s]
+[INFO] ConfigServer ....................................... FAILURE [  3.617 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.241 s
+[INFO] Finished at: 2026-03-30T16:29:04+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project ConfigServer: Fatal error compiling: java.lang.ExceptionInInitializerError: com.sun.tools.javac.code.TypeTag :: UNKNOWN -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :ConfigServer
