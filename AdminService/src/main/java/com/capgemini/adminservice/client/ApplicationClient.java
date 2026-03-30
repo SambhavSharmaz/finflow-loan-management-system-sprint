@@ -3,7 +3,7 @@ package com.capgemini.adminservice.client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "application-service", url = "${APPLICATION_SERVICE_URL:http://localhost:8082}")
+@FeignClient(name = "APPLICATION-SERVICE", url = "${APPLICATION_SERVICE_URL:http://localhost:8082}")
 public interface ApplicationClient {
 
     @PutMapping("/applications/{id}/status")

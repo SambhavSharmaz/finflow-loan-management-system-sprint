@@ -1,6 +1,8 @@
 spring:
+  config:
+    import: "configserver:http://localhost:8888/"
   application:
-    name: auth-service
+    name: AUTH-SERVICE
 
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3037/auth_db}

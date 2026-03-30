@@ -22,7 +22,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 @Service
 public class DocumentService {
 
-    private DocumentRepository documentRepository;
+    private final DocumentRepository documentRepository;
     private RabbitTemplate rabbitTemplate;
     private DbxClientV2 dbxClient;
     private String dropboxFolder;

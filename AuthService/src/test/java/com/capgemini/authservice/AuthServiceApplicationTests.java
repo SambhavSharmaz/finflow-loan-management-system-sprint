@@ -15,6 +15,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.springframework.test.context.ActiveProfiles;
+
+@ActiveProfiles("test")
 @SpringBootTest(properties = {
         "spring.datasource.url=jdbc:h2:mem:authservice;DB_CLOSE_DELAY=-1",
         "spring.datasource.driver-class-name=org.h2.Driver",
@@ -22,7 +25,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "spring.datasource.password=",
         "spring.jpa.hibernate.ddl-auto=create-drop",
         "eureka.client.enabled=false",
-        "auth.jwt.secret=01234567890123456789012345678901"
+        "auth.jwt.secret=01234567890123456789012345678901",
+        "spring.cloud.config.enabled=false",
+        "spring.config.import="
 })
 @AutoConfigureMockMvc
 class AuthServiceApplicationTests {

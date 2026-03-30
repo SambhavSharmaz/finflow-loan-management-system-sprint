@@ -13,8 +13,8 @@ import java.util.Locale;
 @Service
 public class AdminService {
 
-    private DecisionRepository decisionRepository;
-    private ApplicationClient applicationClient;
+    private final DecisionRepository decisionRepository;
+    private final ApplicationClient applicationClient;
 
     public AdminService(
             DecisionRepository decisionRepository,

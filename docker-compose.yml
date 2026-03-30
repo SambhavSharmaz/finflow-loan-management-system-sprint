@@ -37,6 +37,17 @@ services:
       - "9090:9090"
     depends_on:
       - zipkin
+      - config-server
+
+  config-server:
+    build:
+      context: ./ConfigServer
+    container_name: finflow-config-server
+    restart: on-failure
+    environment:
+      EUREKA_SERVER_URL: http://eureka-server:9090
+    ports:
+      - "8888:8888"
 
   auth-service:
     build:
@@ -124,6 +135,7 @@ services:
     restart: on-failure
     environment:
       ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+      EUREKA_APP_URL: http://eureka-server:9090
       AUTH_SERVICE_URL: http://auth-service:8081
       APPLICATION_SERVICE_URL: http://application-service:8082
       DOCUMENT_SERVICE_URL: http://document-service:8083

@@ -1,6 +1,8 @@
 spring:
+  config:
+    import: "configserver:http://localhost:8888/"
   application:
-    name: application-service
+    name: APPLICATION-SERVICE
 
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3037/application_db}

@@ -16,6 +16,7 @@ public class Document {
 
     private String fileName;
 
+
     private String fileUrl;
 
     private String status;

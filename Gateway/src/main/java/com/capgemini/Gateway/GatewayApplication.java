@@ -23,16 +23,19 @@ public class GatewayApplication {
     private final String applicationServiceUrl;
     private final String documentServiceUrl;
     private final String adminServiceUrl;
+    private final String eurekaAppUrl;
 
     public GatewayApplication(
             @Value("${AUTH_SERVICE_URL:http://localhost:8081}") String authServiceUrl,
             @Value("${APPLICATION_SERVICE_URL:http://localhost:8082}") String applicationServiceUrl,
             @Value("${DOCUMENT_SERVICE_URL:http://localhost:8083}") String documentServiceUrl,
-            @Value("${ADMIN_SERVICE_URL:http://localhost:8084}") String adminServiceUrl) {
+            @Value("${ADMIN_SERVICE_URL:http://localhost:8084}") String adminServiceUrl,
+            @Value("${EUREKA_APP_URL:http://localhost:9090}") String eurekaAppUrl) {
         this.authServiceUrl = authServiceUrl;
         this.applicationServiceUrl = applicationServiceUrl;
         this.documentServiceUrl = documentServiceUrl;
         this.adminServiceUrl = adminServiceUrl;
+        this.eurekaAppUrl = eurekaAppUrl;
     }
 
     public static void main(String[] args) {
@@ -69,10 +72,18 @@ public class GatewayApplication {
                 .filter(circuitBreaker("adminCB", URI.create("forward:/fallback/admin")))
                 .build();
 
+        RouterFunction<ServerResponse> eurekaRoutes = route("eureka-server")
+                .route(path("/gateway/eureka").or(path("/gateway/eureka/**")), http())
+                .before(url(eurekaAppUrl))
+                .before(stripPrefix(2))
+                .filter(circuitBreaker("eurekaCB", URI.create("forward:/fallback/eureka")))
+                .build();
+
         return authRoutes
                 .andOther(applicationRoutes)
                 .andOther(documentRoutes)
-                .andOther(adminRoutes);
+                .andOther(adminRoutes)
+                .andOther(eurekaRoutes);
     }
 
     @Bean
@@ -82,6 +93,7 @@ public class GatewayApplication {
                 .route(org.springframework.web.servlet.function.RequestPredicates.path("/fallback/app"), request -> ServerResponse.ok().body("Application service is unavailable."))
                 .route(org.springframework.web.servlet.function.RequestPredicates.path("/fallback/doc"), request -> ServerResponse.ok().body("Document service is unavailable."))
                 .route(org.springframework.web.servlet.function.RequestPredicates.path("/fallback/admin"), request -> ServerResponse.ok().body("Admin service is unavailable."))
+                .route(org.springframework.web.servlet.function.RequestPredicates.path("/fallback/eureka"), request -> ServerResponse.ok().body("Eureka server is unavailable."))
                 .build();
     }
 

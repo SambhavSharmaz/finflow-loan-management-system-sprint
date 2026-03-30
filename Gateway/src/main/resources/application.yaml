@@ -1,6 +1,8 @@
 spring:
+  config:
+    import: "configserver:http://localhost:8888/"
   application:
-    name: gateway-service
+    name: API-GATEWAY
 
 server:
   port: 8080
@@ -20,6 +22,8 @@ management:
 springdoc:
   swagger-ui:
     urls:
+      - name: Eureka Server
+        url: /gateway/eureka/v3/api-docs
       - name: Auth Service
         url: /gateway/auth/v3/api-docs
       - name: Application Service
