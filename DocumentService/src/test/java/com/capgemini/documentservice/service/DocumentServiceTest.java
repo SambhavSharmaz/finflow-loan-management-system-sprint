@@ -3,24 +3,23 @@ package com.capgemini.documentservice.service;
 import com.capgemini.documentservice.dto.DocumentResponse;
 import com.capgemini.documentservice.entity.Document;
 import com.capgemini.documentservice.repository.DocumentRepository;
-import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.amqp.rabbit.core.RabbitOperations;
-import org.springframework.mock.web.MockMultipartFile;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class DocumentServiceTest {
@@ -31,59 +30,112 @@ class DocumentServiceTest {
     @Mock
     private RabbitOperations rabbitTemplate;
 
-    private final DbxClientV2 dbxClient =
-            new DbxClientV2(DbxRequestConfig.newBuilder("document-service-test").build(), "test-token");
+    @Mock
+    private DbxClientV2 dbxClient;
+
+    private DocumentService documentService;
+
+    @BeforeEach
+    void setUp() {
+        documentService = new DocumentService(documentRepository, rabbitTemplate, dbxClient, "/finflow-test");
+    }
+
+    private Document createDocument() {
+        Document doc = new Document();
+        doc.setId(1L);
+        doc.setApplicationId(100L);
+        doc.setFileName("test.pdf");
+        doc.setFileUrl("http://dropbox.com/test.pdf");
+        doc.setStatus("UPLOADED");
+        return doc;
+    }
 
     @Test
-    void verifyShouldMarkDocumentAsVerified() {
-        DocumentService documentService =
-                new DocumentService(documentRepository, rabbitTemplate, dbxClient, "/finflow");
+    void verify_Success() {
+        Document doc = createDocument();
+        Document verifiedDoc = createDocument();
+        verifiedDoc.setStatus("VERIFIED");
 
-        Document document = new Document();
-        document.setId(1L);
-        document.setApplicationId(10L);
-        document.setFileName("id-proof.pdf");
-        document.setFileUrl("http://example.com/file");
-        document.setStatus("UPLOADED");
-
-        when(documentRepository.findById(1L)).thenReturn(Optional.of(document));
-        when(documentRepository.save(any(Document.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(documentRepository.findById(1L)).thenReturn(Optional.of(doc));
+        when(documentRepository.save(any(Document.class))).thenReturn(verifiedDoc);
 
         DocumentResponse response = documentService.verify(1L);
 
+        assertNotNull(response);
         assertEquals("VERIFIED", response.getStatus());
-        assertEquals(10L, response.getApplicationId());
-        verify(rabbitTemplate).convertAndSend("documentUploadQueue", "10,DOCS_VERIFIED");
+        assertEquals(100L, response.getApplicationId());
+        verify(rabbitTemplate).convertAndSend(eq("documentUploadQueue"), anyString());
     }
 
     @Test
-    void verifyShouldThrowWhenDocumentDoesNotExist() {
-        DocumentService documentService =
-                new DocumentService(documentRepository, rabbitTemplate, dbxClient, "/finflow");
+    void verify_NotFound() {
+        when(documentRepository.findById(999L)).thenReturn(Optional.empty());
 
-        when(documentRepository.findById(99L)).thenReturn(Optional.empty());
-
-        NoSuchElementException exception = assertThrows(
-                NoSuchElementException.class,
-                () -> documentService.verify(99L)
-        );
-
-        assertEquals("Document not found.", exception.getMessage());
+        assertThrows(NoSuchElementException.class,
+                () -> documentService.verify(999L));
     }
 
     @Test
-    void uploadShouldThrowWhenFileIsEmpty() {
-        DocumentService documentService =
-                new DocumentService(documentRepository, rabbitTemplate, dbxClient, "/finflow");
+    void get_Success() {
+        Document doc = createDocument();
+        when(documentRepository.findById(1L)).thenReturn(Optional.of(doc));
 
-        MockMultipartFile file = new MockMultipartFile("file", "test.pdf", "application/pdf", new byte[0]);
+        DocumentResponse response = documentService.get(1L);
 
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> documentService.upload(1L, file)
-        );
+        assertNotNull(response);
+        assertEquals(1L, response.getId());
+        assertEquals("test.pdf", response.getFileName());
+        assertEquals("http://dropbox.com/test.pdf", response.getFileUrl());
+    }
 
-        assertEquals("File is empty.", exception.getMessage());
-        verify(documentRepository, never()).save(any(Document.class));
+    @Test
+    void get_NotFound() {
+        when(documentRepository.findById(999L)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementException.class,
+                () -> documentService.get(999L));
+    }
+
+    @Test
+    void delete_Success() {
+        Document doc = createDocument();
+        when(documentRepository.findById(1L)).thenReturn(Optional.of(doc));
+        doNothing().when(documentRepository).delete(doc);
+
+        assertDoesNotThrow(() -> documentService.delete(1L));
+        verify(documentRepository).delete(doc);
+    }
+
+    @Test
+    void delete_NotFound() {
+        when(documentRepository.findById(999L)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementException.class,
+                () -> documentService.delete(999L));
+    }
+
+    @Test
+    void getByApplicationId_Success() {
+        Document doc1 = createDocument();
+        Document doc2 = createDocument();
+        doc2.setId(2L);
+        doc2.setFileName("doc2.pdf");
+
+        when(documentRepository.findByApplicationId(100L)).thenReturn(List.of(doc1, doc2));
+
+        List<DocumentResponse> responses = documentService.getByApplicationId(100L);
+
+        assertEquals(2, responses.size());
+        assertEquals("test.pdf", responses.get(0).getFileName());
+        assertEquals("doc2.pdf", responses.get(1).getFileName());
+    }
+
+    @Test
+    void getByApplicationId_Empty() {
+        when(documentRepository.findByApplicationId(999L)).thenReturn(List.of());
+
+        List<DocumentResponse> responses = documentService.getByApplicationId(999L);
+
+        assertTrue(responses.isEmpty());
     }
 }

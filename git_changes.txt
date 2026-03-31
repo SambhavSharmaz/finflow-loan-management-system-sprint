@@ -1,0 +1,50 @@
+warning: in the working copy of 'AdminService/pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AdminService/src/main/java/com/capgemini/adminservice/dto/DecisionRequest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AdminService/src/main/java/com/capgemini/adminservice/exception/GlobalExceptionHandler.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AdminService/src/main/resources/application.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AdminService/src/test/java/com/capgemini/adminservice/service/AdminServiceTest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'ApplicationService/pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'ApplicationService/src/main/java/com/capgemini/applicationservice/controller/ApplicationController.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'ApplicationService/src/main/java/com/capgemini/applicationservice/dto/ApplicationRequest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'ApplicationService/src/main/java/com/capgemini/applicationservice/exception/GlobalExceptionHandler.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'ApplicationService/src/main/resources/application.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'ApplicationService/src/test/java/com/capgemini/applicationservice/service/ApplicationServiceTest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/src/main/java/com/capgemini/authservice/dto/LoginRequest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/src/main/java/com/capgemini/authservice/dto/SignupRequest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/src/main/java/com/capgemini/authservice/exception/GlobalExceptionHandler.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/src/main/resources/application.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/src/test/java/com/capgemini/authservice/controller/AuthControllerTest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AuthService/src/test/java/com/capgemini/authservice/service/AuthServiceTest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'DocumentService/pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'DocumentService/src/main/resources/application.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'DocumentService/src/test/java/com/capgemini/documentservice/service/DocumentServiceTest.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Gateway/src/main/resources/application.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docker-compose.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pom.xml', LF will be replaced by CRLF the next time Git touches it
+AdminService/pom.xml
+AdminService/src/main/java/com/capgemini/adminservice/dto/DecisionRequest.java
+AdminService/src/main/java/com/capgemini/adminservice/exception/GlobalExceptionHandler.java
+AdminService/src/main/resources/application.yaml
+AdminService/src/test/java/com/capgemini/adminservice/service/AdminServiceTest.java
+ApplicationService/pom.xml
+ApplicationService/src/main/java/com/capgemini/applicationservice/controller/ApplicationController.java
+ApplicationService/src/main/java/com/capgemini/applicationservice/dto/ApplicationRequest.java
+ApplicationService/src/main/java/com/capgemini/applicationservice/exception/GlobalExceptionHandler.java
+ApplicationService/src/main/resources/application.yaml
+ApplicationService/src/test/java/com/capgemini/applicationservice/service/ApplicationServiceTest.java
+AuthService/pom.xml
+AuthService/src/main/java/com/capgemini/authservice/controller/AuthController.java
+AuthService/src/main/java/com/capgemini/authservice/dto/LoginRequest.java
+AuthService/src/main/java/com/capgemini/authservice/dto/SignupRequest.java
+AuthService/src/main/java/com/capgemini/authservice/exception/GlobalExceptionHandler.java
+AuthService/src/main/resources/application.yaml
+AuthService/src/test/java/com/capgemini/authservice/controller/AuthControllerTest.java
+AuthService/src/test/java/com/capgemini/authservice/service/AuthServiceTest.java
+DocumentService/pom.xml
+DocumentService/src/main/resources/application.yaml
+DocumentService/src/test/java/com/capgemini/documentservice/service/DocumentServiceTest.java
+Gateway/src/main/resources/application.yaml
+docker-compose.yml
+pom.xml

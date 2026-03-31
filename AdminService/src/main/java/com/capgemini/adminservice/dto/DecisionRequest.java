@@ -1,8 +1,14 @@
 package com.capgemini.adminservice.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class DecisionRequest {
 
+    @NotBlank(message = "Status is required.")
     private String status;
+
+    @Size(max = 255, message = "Remarks must be at most 255 characters.")
     private String remarks;
 
     public String getStatus() {

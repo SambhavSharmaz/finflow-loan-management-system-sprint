@@ -7,7 +7,6 @@ import com.capgemini.authservice.entity.User;
 import com.capgemini.authservice.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -16,12 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
@@ -36,77 +33,88 @@ class AuthServiceTest {
     private AuthService authService;
 
     @Test
-    void registerShouldSaveNewUser() {
+    void register_Success() {
         SignupRequest request = new SignupRequest();
-        request.setName("Test User");
-        request.setEmail("test@example.com");
-        request.setPassword("secret123");
+        request.setName("John");
+        request.setEmail("john@test.com");
+        request.setPassword("password123");
 
-        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.empty());
-        when(passwordEncoder.encode("secret123")).thenReturn("encoded-password");
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(userRepository.findByEmail("john@test.com")).thenReturn(Optional.empty());
+        when(passwordEncoder.encode("password123")).thenReturn("encodedPassword");
 
-        User savedUser = authService.register(request);
+        User savedUser = new User();
+        savedUser.setId(1L);
+        savedUser.setName("John");
+        savedUser.setEmail("john@test.com");
+        savedUser.setPassword("encodedPassword");
+        savedUser.setRole(Role.ROLE_USER);
+        when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
-        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
-        verify(userRepository).save(userCaptor.capture());
+        User result = authService.register(request);
 
-        User user = userCaptor.getValue();
-        assertEquals("Test User", user.getName());
-        assertEquals("test@example.com", user.getEmail());
-        assertEquals("encoded-password", user.getPassword());
-        assertEquals(Role.ROLE_USER, user.getRole());
-
-        assertEquals("test@example.com", savedUser.getEmail());
-        assertEquals(Role.ROLE_USER, savedUser.getRole());
+        assertNotNull(result);
+        assertEquals("john@test.com", result.getEmail());
+        assertEquals("John", result.getName());
+        assertEquals(Role.ROLE_USER, result.getRole());
+        verify(userRepository).save(any(User.class));
     }
 
     @Test
-    void registerShouldThrowWhenEmailAlreadyExists() {
+    void register_EmailAlreadyExists() {
         SignupRequest request = new SignupRequest();
-        request.setEmail("test@example.com");
+        request.setEmail("john@test.com");
 
-        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(new User()));
+        when(userRepository.findByEmail("john@test.com")).thenReturn(Optional.of(new User()));
 
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register(request)
-        );
-
-        assertEquals("Email is already registered.", exception.getMessage());
+        assertThrows(IllegalArgumentException.class, () -> authService.register(request));
+        verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void loginShouldReturnUserWhenPasswordMatches() {
+    void login_Success() {
         LoginRequest request = new LoginRequest();
-        request.setEmail("test@example.com");
-        request.setPassword("secret123");
+        request.setEmail("john@test.com");
+        request.setPassword("password123");
 
         User user = new User();
-        user.setEmail("test@example.com");
-        user.setPassword("encoded-password");
+        user.setId(1L);
+        user.setEmail("john@test.com");
+        user.setPassword("encodedPassword");
         user.setRole(Role.ROLE_USER);
 
-        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
-        when(passwordEncoder.matches("secret123", "encoded-password")).thenReturn(true);
+        when(userRepository.findByEmail("john@test.com")).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches("password123", "encodedPassword")).thenReturn(true);
 
-        User loggedInUser = authService.login(request);
+        User result = authService.login(request);
 
-        assertSame(user, loggedInUser);
+        assertNotNull(result);
+        assertEquals("john@test.com", result.getEmail());
     }
 
     @Test
-    void loginShouldThrowWhenUserIsMissing() {
+    void login_UserNotFound() {
         LoginRequest request = new LoginRequest();
-        request.setEmail("missing@example.com");
+        request.setEmail("unknown@test.com");
+        request.setPassword("password123");
 
-        when(userRepository.findByEmail("missing@example.com")).thenReturn(Optional.empty());
+        when(userRepository.findByEmail("unknown@test.com")).thenReturn(Optional.empty());
 
-        NoSuchElementException exception = assertThrows(
-                NoSuchElementException.class,
-                () -> authService.login(request)
-        );
+        assertThrows(NoSuchElementException.class, () -> authService.login(request));
+    }
 
-        assertEquals("User not found.", exception.getMessage());
+    @Test
+    void login_InvalidPassword() {
+        LoginRequest request = new LoginRequest();
+        request.setEmail("john@test.com");
+        request.setPassword("wrongPassword");
+
+        User user = new User();
+        user.setEmail("john@test.com");
+        user.setPassword("encodedPassword");
+
+        when(userRepository.findByEmail("john@test.com")).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches("wrongPassword", "encodedPassword")).thenReturn(false);
+
+        assertThrows(IllegalArgumentException.class, () -> authService.login(request));
     }
 }

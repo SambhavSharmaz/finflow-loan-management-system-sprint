@@ -1,0 +1,385 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< com.capgemini:application-service >------------------
+[INFO] Building application-service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ application-service ---
+[INFO] Deleting C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\ApplicationService\target
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (default) @ application-service ---
+Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar
+Progress (1): 0.9/303 kB
+Progress (1): 2.3/303 kB
+Progress (1): 3.4/303 kB
+Progress (1): 4.7/303 kB
+Progress (1): 6.1/303 kB
+Progress (1): 7.5/303 kB
+Progress (1): 8.8/303 kB
+Progress (1): 10/303 kB 
+Progress (1): 12/303 kB
+Progress (1): 13/303 kB
+Progress (1): 14/303 kB
+Progress (1): 16/303 kB
+Progress (1): 17/303 kB
+Progress (1): 18/303 kB
+Progress (1): 20/303 kB
+Progress (1): 21/303 kB
+Progress (1): 23/303 kB
+Progress (1): 24/303 kB
+Progress (1): 25/303 kB
+Progress (1): 27/303 kB
+Progress (1): 28/303 kB
+Progress (1): 29/303 kB
+Progress (1): 31/303 kB
+Progress (1): 32/303 kB
+Progress (1): 33/303 kB
+Progress (1): 35/303 kB
+Progress (1): 36/303 kB
+Progress (1): 38/303 kB
+Progress (1): 39/303 kB
+Progress (1): 40/303 kB
+Progress (1): 42/303 kB
+Progress (1): 43/303 kB
+Progress (1): 44/303 kB
+Progress (1): 46/303 kB
+Progress (1): 47/303 kB
+Progress (1): 49/303 kB
+Progress (1): 50/303 kB
+Progress (1): 51/303 kB
+Progress (1): 53/303 kB
+Progress (1): 54/303 kB
+Progress (1): 55/303 kB
+Progress (1): 60/303 kB
+Progress (1): 64/303 kB
+Progress (1): 68/303 kB
+Progress (1): 72/303 kB
+Progress (1): 77/303 kB
+Progress (1): 81/303 kB
+Progress (1): 85/303 kB
+Progress (1): 89/303 kB
+Progress (1): 93/303 kB
+Progress (1): 93/303 kB
+Progress (1): 98/303 kB
+Progress (1): 102/303 kB
+Progress (1): 106/303 kB
+Progress (1): 110/303 kB
+Progress (1): 115/303 kB
+Progress (1): 119/303 kB
+Progress (1): 123/303 kB
+Progress (1): 127/303 kB
+Progress (1): 132/303 kB
+Progress (1): 136/303 kB
+Progress (1): 140/303 kB
+Progress (1): 144/303 kB
+Progress (1): 148/303 kB
+Progress (1): 153/303 kB
+Progress (1): 157/303 kB
+Progress (1): 161/303 kB
+Progress (1): 165/303 kB
+Progress (1): 170/303 kB
+Progress (1): 174/303 kB
+Progress (1): 178/303 kB
+Progress (1): 182/303 kB
+Progress (1): 187/303 kB
+Progress (1): 191/303 kB
+Progress (1): 195/303 kB
+Progress (1): 199/303 kB
+Progress (1): 203/303 kB
+Progress (1): 208/303 kB
+Progress (1): 212/303 kB
+Progress (1): 216/303 kB
+Progress (1): 220/303 kB
+Progress (1): 225/303 kB
+Progress (1): 241/303 kB
+Progress (1): 257/303 kB
+Progress (1): 274/303 kB
+Progress (1): 290/303 kB
+Progress (1): 303 kB    
+                    
+Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar (303 kB at 348 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.8/asm-commons-9.8.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.8/asm-tree-9.8.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.core/0.8.13/org.jacoco.core-0.8.13.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.report/0.8.13/org.jacoco.report-0.8.13.jar
+Progress (1): 7.7/131 kB
+Progress (1): 8.2/131 kB
+Progress (1): 25/131 kB 
+Progress (1): 41/131 kB
+Progress (1): 57/131 kB
+Progress (1): 74/131 kB
+Progress (1): 82/131 kB
+Progress (1): 98/131 kB
+Progress (1): 115/131 kB
+Progress (1): 123/131 kB
+Progress (1): 131 kB    
+                    
+Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.report/0.8.13/org.jacoco.report-0.8.13.jar (131 kB at 1.8 MB/s)
+Progress (1): 0.9/52 kB
+Progress (1): 2.3/52 kB
+Progress (1): 3.6/52 kB
+Progress (1): 5.0/52 kB
+Progress (1): 6.4/52 kB
+Progress (1): 7.7/52 kB
+Progress (1): 9.1/52 kB
+Progress (1): 10/52 kB 
+Progress (1): 12/52 kB
+Progress (1): 13/52 kB
+Progress (1): 14/52 kB
+Progress (1): 16/52 kB
+Progress (1): 17/52 kB
+Progress (1): 18/52 kB
+Progress (1): 20/52 kB
+Progress (1): 21/52 kB
+Progress (1): 23/52 kB
+Progress (1): 24/52 kB
+Progress (1): 25/52 kB
+Progress (1): 27/52 kB
+Progress (1): 28/52 kB
+Progress (1): 29/52 kB
+Progress (1): 31/52 kB
+Progress (1): 32/52 kB
+Progress (1): 33/52 kB
+Progress (1): 35/52 kB
+Progress (1): 36/52 kB
+Progress (1): 38/52 kB
+Progress (1): 39/52 kB
+Progress (1): 40/52 kB
+Progress (1): 42/52 kB
+Progress (1): 43/52 kB
+Progress (1): 44/52 kB
+Progress (1): 46/52 kB
+Progress (1): 47/52 kB
+Progress (1): 49/52 kB
+Progress (1): 50/52 kB
+Progress (1): 51/52 kB
+Progress (1): 52 kB   
+Progress (2): 52 kB | 0.9/223 kB
+Progress (2): 52 kB | 2.3/223 kB
+Progress (2): 52 kB | 3.6/223 kB
+Progress (2): 52 kB | 5.0/223 kB
+Progress (2): 52 kB | 6.4/223 kB
+Progress (2): 52 kB | 7.7/223 kB
+Progress (2): 52 kB | 9.1/223 kB
+Progress (2): 52 kB | 10/223 kB 
+Progress (2): 52 kB | 12/223 kB
+Progress (2): 52 kB | 13/223 kB
+Progress (2): 52 kB | 15/223 kB
+Progress (3): 52 kB | 15/223 kB | 0.9/73 kB
+Progress (3): 52 kB | 16/223 kB | 0.9/73 kB
+Progress (3): 52 kB | 16/223 kB | 2.3/73 kB
+Progress (3): 52 kB | 17/223 kB | 2.3/73 kB
+Progress (3): 52 kB | 17/223 kB | 3.6/73 kB
+Progress (3): 52 kB | 18/223 kB | 3.6/73 kB
+Progress (3): 52 kB | 20/223 kB | 3.6/73 kB
+Progress (3): 52 kB | 20/223 kB | 5.0/73 kB
+Progress (3): 52 kB | 21/223 kB | 5.0/73 kB
+Progress (3): 52 kB | 21/223 kB | 6.4/73 kB
+Progress (3): 52 kB | 23/223 kB | 6.4/73 kB
+Progress (3): 52 kB | 23/223 kB | 7.7/73 kB
+Progress (3): 52 kB | 24/223 kB | 7.7/73 kB
+Progress (3): 52 kB | 24/223 kB | 9.1/73 kB
+Progress (3): 52 kB | 25/223 kB | 9.1/73 kB
+Progress (3): 52 kB | 25/223 kB | 10/73 kB 
+Progress (3): 52 kB | 27/223 kB | 10/73 kB
+Progress (3): 52 kB | 27/223 kB | 12/73 kB
+Progress (3): 52 kB | 28/223 kB | 12/73 kB
+Progress (3): 52 kB | 28/223 kB | 12/73 kB
+Progress (3): 52 kB | 29/223 kB | 12/73 kB
+Progress (3): 52 kB | 29/223 kB | 14/73 kB
+Progress (3): 52 kB | 31/223 kB | 14/73 kB
+Progress (3): 52 kB | 31/223 kB | 15/73 kB
+Progress (3): 52 kB | 32/223 kB | 15/73 kB
+Progress (3): 52 kB | 32/223 kB | 16/73 kB
+Progress (3): 52 kB | 33/223 kB | 16/73 kB
+Progress (3): 52 kB | 35/223 kB | 16/73 kB
+Progress (3): 52 kB | 35/223 kB | 18/73 kB
+Progress (3): 52 kB | 36/223 kB | 18/73 kB
+Progress (3): 52 kB | 36/223 kB | 19/73 kB
+Progress (3): 52 kB | 38/223 kB | 19/73 kB
+Progress (3): 52 kB | 38/223 kB | 21/73 kB
+Progress (3): 52 kB | 39/223 kB | 21/73 kB
+Progress (3): 52 kB | 39/223 kB | 22/73 kB
+Progress (3): 52 kB | 40/223 kB | 22/73 kB
+Progress (3): 52 kB | 40/223 kB | 23/73 kB
+Progress (3): 52 kB | 42/223 kB | 23/73 kB
+Progress (3): 52 kB | 42/223 kB | 25/73 kB
+Progress (3): 52 kB | 43/223 kB | 25/73 kB
+Progress (3): 52 kB | 43/223 kB | 26/73 kB
+Progress (3): 52 kB | 44/223 kB | 26/73 kB
+Progress (3): 52 kB | 44/223 kB | 27/73 kB
+Progress (3): 52 kB | 46/223 kB | 27/73 kB
+Progress (3): 52 kB | 46/223 kB | 29/73 kB
+Progress (3): 52 kB | 47/223 kB | 29/73 kB
+Progress (3): 52 kB | 47/223 kB | 30/73 kB
+Progress (3): 52 kB | 49/223 kB | 30/73 kB
+Progress (3): 52 kB | 49/223 kB | 31/73 kB
+Progress (3): 52 kB | 50/223 kB | 31/73 kB
+Progress (3): 52 kB | 50/223 kB | 33/73 kB
+Progress (3): 52 kB | 51/223 kB | 33/73 kB
+Progress (3): 52 kB | 51/223 kB | 34/73 kB
+Progress (3): 52 kB | 51/223 kB | 36/73 kB
+Progress (3): 52 kB | 53/223 kB | 36/73 kB
+Progress (3): 52 kB | 54/223 kB | 36/73 kB
+Progress (3): 52 kB | 54/223 kB | 37/73 kB
+Progress (3): 52 kB | 55/223 kB | 37/73 kB
+Progress (3): 52 kB | 55/223 kB | 38/73 kB
+Progress (3): 52 kB | 55/223 kB | 40/73 kB
+Progress (3): 52 kB | 60/223 kB | 40/73 kB
+Progress (3): 52 kB | 60/223 kB | 41/73 kB
+Progress (3): 52 kB | 64/223 kB | 41/73 kB
+Progress (3): 52 kB | 64/223 kB | 42/73 kB
+Progress (3): 52 kB | 64/223 kB | 44/73 kB
+Progress (3): 52 kB | 68/223 kB | 44/73 kB
+Progress (3): 52 kB | 68/223 kB | 45/73 kB
+Progress (3): 52 kB | 72/223 kB | 45/73 kB
+Progress (3): 52 kB | 72/223 kB | 47/73 kB
+Progress (3): 52 kB | 72/223 kB | 48/73 kB
+Progress (3): 52 kB | 72/223 kB | 49/73 kB
+Progress (3): 52 kB | 72/223 kB | 51/73 kB
+Progress (3): 52 kB | 72/223 kB | 52/73 kB
+Progress (3): 52 kB | 72/223 kB | 53/73 kB
+Progress (3): 52 kB | 72/223 kB | 55/73 kB
+Progress (3): 52 kB | 72/223 kB | 59/73 kB
+Progress (3): 52 kB | 72/223 kB | 63/73 kB
+Progress (3): 52 kB | 72/223 kB | 67/73 kB
+Progress (3): 52 kB | 72/223 kB | 72/73 kB
+Progress (3): 52 kB | 72/223 kB | 73 kB   
+Progress (3): 52 kB | 77/223 kB | 73 kB
+Progress (3): 52 kB | 81/223 kB | 73 kB
+Progress (3): 52 kB | 85/223 kB | 73 kB
+Progress (3): 52 kB | 89/223 kB | 73 kB
+Progress (3): 52 kB | 93/223 kB | 73 kB
+Progress (3): 52 kB | 98/223 kB | 73 kB
+Progress (3): 52 kB | 102/223 kB | 73 kB
+Progress (3): 52 kB | 106/223 kB | 73 kB
+Progress (3): 52 kB | 110/223 kB | 73 kB
+Progress (3): 52 kB | 115/223 kB | 73 kB
+Progress (3): 52 kB | 119/223 kB | 73 kB
+Progress (3): 52 kB | 123/223 kB | 73 kB
+Progress (3): 52 kB | 127/223 kB | 73 kB
+Progress (3): 52 kB | 130/223 kB | 73 kB
+                                        
+Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.8/asm-tree-9.8.jar (52 kB at 315 kB/s)
+Progress (2): 135/223 kB | 73 kB
+Progress (2): 139/223 kB | 73 kB
+Progress (2): 143/223 kB | 73 kB
+Progress (2): 147/223 kB | 73 kB
+Progress (2): 151/223 kB | 73 kB
+Progress (2): 156/223 kB | 73 kB
+Progress (2): 160/223 kB | 73 kB
+Progress (2): 164/223 kB | 73 kB
+Progress (2): 168/223 kB | 73 kB
+Progress (2): 173/223 kB | 73 kB
+Progress (2): 177/223 kB | 73 kB
+Progress (2): 181/223 kB | 73 kB
+Progress (2): 185/223 kB | 73 kB
+Progress (2): 190/223 kB | 73 kB
+Progress (2): 194/223 kB | 73 kB
+Progress (2): 198/223 kB | 73 kB
+Progress (2): 202/223 kB | 73 kB
+Progress (2): 206/223 kB | 73 kB
+Progress (2): 211/223 kB | 73 kB
+Progress (2): 215/223 kB | 73 kB
+Progress (2): 219/223 kB | 73 kB
+Progress (2): 223/223 kB | 73 kB
+Progress (2): 223 kB | 73 kB    
+                            
+Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.8/asm-commons-9.8.jar (73 kB at 430 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.core/0.8.13/org.jacoco.core-0.8.13.jar (223 kB at 1.3 MB/s)
+[INFO] argLine set to -javaagent:C:\\Users\\Sambhav\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.13\\org.jacoco.agent-0.8.13-runtime.jar=destfile=C:\\Users\\Sambhav\\Downloads\\FinFlow-Loan-Management-System\\ApplicationService\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ application-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ application-service ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 12 source files with javac [debug release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ application-service ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ application-service ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 3 source files with javac [debug release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.1.2:test (default-test) @ application-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.capgemini.applicationservice.ApplicationServiceApplicationTests
+15:24:18.856 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.capgemini.applicationservice.ApplicationServiceApplicationTests]: ApplicationServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:24:19.105 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.capgemini.applicationservice.ApplicationServiceApplication for test class com.capgemini.applicationservice.ApplicationServiceApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-03-31T15:24:20.408+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] c.c.a.ApplicationServiceApplicationTests : Starting ApplicationServiceApplicationTests using Java 24.0.2 with PID 32180 (started by Sambhav in C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\ApplicationService)
+2026-03-31T15:24:20.418+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] c.c.a.ApplicationServiceApplicationTests : The following 1 profile is active: "dev"
+2026-03-31T15:24:23.298+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-31T15:24:23.576+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 263 ms. Found 1 JPA repository interface.
+2026-03-31T15:24:24.170+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] o.s.cloud.context.scope.GenericScope     : BeanFactory id=5ae0f794-5aba-355d-9d85-aa11587faf86
+2026-03-31T15:24:25.272+05:30  WARN 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-03-31T15:24:25.279+05:30  WARN 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] trationDelegate$BeanPostProcessorChecker : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-03-31T15:24:26.093+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31T15:24:26.392+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-03-31T15:24:26.541+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-31T15:24:27.460+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-31T15:24:27.570+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-31T15:24:28.252+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:applicationservice user=SA
+2026-03-31T15:24:28.259+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-31T15:24:34.486+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31T15:24:35.018+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/Users/Sambhav/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.20/tomcat-embed-core-10.1.20.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-03-31T15:24:44.165+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2026-03-31T15:24:44.298+05:30  WARN 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-03-31T15:24:44.330+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2026-03-31T15:24:44.536+05:30  INFO 32180 --- [APPLICATION-SERVICE] [           main] [                                                 ] c.c.a.ApplicationServiceApplicationTests : Started ApplicationServiceApplicationTests in 25.112 seconds (process running for 28.059)
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\Sambhav\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.13\byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction (file:/C:/Users/Sambhav/.m2/repository/net/bytebuddy/byte-buddy/1.14.13/byte-buddy-1.14.13.jar)
+WARNING: Please consider reporting this to the maintainers of class net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.27 s -- in com.capgemini.applicationservice.ApplicationServiceApplicationTests
+[INFO] Running com.capgemini.applicationservice.controller.ApplicationControllerTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.556 s -- in com.capgemini.applicationservice.controller.ApplicationControllerTest
+[INFO] Running com.capgemini.applicationservice.service.ApplicationServiceTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.473 s -- in com.capgemini.applicationservice.service.ApplicationServiceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 24, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.3.0:jar (default-jar) @ application-service ---
+[INFO] Building jar: C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\ApplicationService\target\application-service-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:3.2.5:repackage (repackage) @ application-service ---
+[INFO] Replacing main artifact C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\ApplicationService\target\application-service-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\Sambhav\Downloads\FinFlow-Loan-Management-System\ApplicationService\target\application-service-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (report) @ application-service ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  46.550 s
+[INFO] Finished at: 2026-03-31T15:24:50+05:30
+[INFO] ------------------------------------------------------------------------

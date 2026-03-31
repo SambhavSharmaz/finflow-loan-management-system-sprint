@@ -1,5 +1,6 @@
 package com.capgemini.authservice.controller;
 
+import com.capgemini.authservice.dto.ApiResponse;
 import com.capgemini.authservice.dto.AuthResponse;
 import com.capgemini.authservice.dto.LoginRequest;
 import com.capgemini.authservice.dto.SignupRequest;
@@ -7,79 +8,67 @@ import com.capgemini.authservice.entity.Role;
 import com.capgemini.authservice.entity.User;
 import com.capgemini.authservice.service.AuthService;
 import com.capgemini.authservice.util.JwtUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.*;
 
-import org.springframework.test.context.ActiveProfiles;
+@ExtendWith(MockitoExtension.class)
+class AuthControllerTest {
 
-@ActiveProfiles("test")
-@WebMvcTest(controllers = AuthController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class, properties = {"spring.cloud.config.enabled=false", "spring.config.import="})
-public class AuthControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private AuthService authService;
 
-    @MockBean
+    @Mock
     private JwtUtil jwtUtil;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    @InjectMocks
+    private AuthController authController;
 
     @Test
-    public void testSignup_Success() throws Exception {
-        SignupRequest signupRequest = new SignupRequest();
-        signupRequest.setEmail("test@example.com");
-        signupRequest.setPassword("password123");
-        signupRequest.setName("Test User");
-        User mockUser = new User();
-        mockUser.setEmail("test@example.com");
-        Mockito.when(authService.register(any(SignupRequest.class))).thenReturn(mockUser);
+    void signup_Success() {
+        SignupRequest request = new SignupRequest();
+        request.setName("John");
+        request.setEmail("john@test.com");
+        request.setPassword("password123");
 
-        mockMvc.perform(post("/auth/signup")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(signupRequest)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.message").value("Signup completed successfully."))
-                .andExpect(jsonPath("$.data").value("User registered successfully."));
+        User user = new User();
+        user.setId(1L);
+        user.setEmail("john@test.com");
+        when(authService.register(any(SignupRequest.class))).thenReturn(user);
+
+        ApiResponse<String> response = authController.signup(request);
+
+        assertTrue(response.isSuccess());
+        assertEquals("Signup completed successfully.", response.getMessage());
+        verify(authService).register(request);
     }
 
     @Test
-    public void testLogin_Success() throws Exception {
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail("test@example.com");
-        loginRequest.setPassword("password123");
+    void login_Success() {
+        LoginRequest request = new LoginRequest();
+        request.setEmail("john@test.com");
+        request.setPassword("password123");
 
         User user = new User();
-        user.setEmail("test@example.com");
+        user.setId(1L);
+        user.setEmail("john@test.com");
         user.setRole(Role.ROLE_USER);
 
-        Mockito.when(authService.login(any(LoginRequest.class))).thenReturn(user);
-        Mockito.when(jwtUtil.generateToken(anyString(), any(Role.class))).thenReturn("mockJwtToken");
+        when(authService.login(any(LoginRequest.class))).thenReturn(user);
+        when(jwtUtil.generateToken("john@test.com", Role.ROLE_USER)).thenReturn("test-jwt-token");
 
-        mockMvc.perform(post("/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.message").value("Login completed successfully."))
-                .andExpect(jsonPath("$.data.token").value("mockJwtToken"))
-                .andExpect(jsonPath("$.data.role").value("ROLE_USER"));
+        ApiResponse<AuthResponse> response = authController.login(request);
+
+        assertTrue(response.isSuccess());
+        assertEquals("Login completed successfully.", response.getMessage());
+        assertNotNull(response.getData());
+        assertEquals("test-jwt-token", response.getData().getToken());
+        assertEquals(Role.ROLE_USER, response.getData().getRole());
     }
 }

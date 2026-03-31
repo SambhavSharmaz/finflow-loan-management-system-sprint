@@ -5,6 +5,7 @@ import com.capgemini.applicationservice.dto.ApplicationRequest;
 import com.capgemini.applicationservice.dto.ApplicationResponse;
 import com.capgemini.applicationservice.entity.LoanApplication;
 import com.capgemini.applicationservice.service.ApplicationService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +47,7 @@ public class ApplicationController {
     @PostMapping
     public ApiResponse<ApplicationResponse> create(
             @org.springframework.web.bind.annotation.RequestHeader(value = "Authorization", required = false) String authHeader,
-            @RequestBody ApplicationRequest request) {
+            @Valid @RequestBody ApplicationRequest request) {
         String email = getUserEmail(authHeader);
         LoanApplication loanApplication = applicationService.create(request, email);
         ApplicationResponse response = toResponse(loanApplication);
@@ -100,7 +101,7 @@ public class ApplicationController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<ApplicationResponse> update(@PathVariable Long id, @RequestBody ApplicationRequest request) {
+    public ApiResponse<ApplicationResponse> update(@PathVariable Long id, @Valid @RequestBody ApplicationRequest request) {
         LoanApplication loanApplication = applicationService.update(id, request);
         ApplicationResponse response = toResponse(loanApplication);
         return new ApiResponse<>(true, "Application updated successfully.", response);
