@@ -1,0 +1,167 @@
+# FinFlow Loan Management System - Architecture Diagrams
+
+This document contains the high-level design (HLD), low-level design (LLD), flow diagrams, and architectural components of the FinFlow Loan Management System. The diagrams are generated using Mermaid, which allows them to be rendered visually. 
+
+You can view these diagrams right here, and easily right-click to copy or save them as images (PNG) directly from your browser or chat interface.
+
+## 1. High Level Design (HLD) / System Architecture
+
+The HLD illustrates the overall microservices architecture of the system. It shows the React frontend, the API Gateway, all backend microservices, the shared infrastructure (Eureka, Config Server, RabbitMQ, Zipkin), and external integrations like the Dropbox API.
+
+```mermaid
+graph TD
+    subgraph Client
+        React[React Frontend App]
+    end
+
+    subgraph Infrastructure
+        Eureka[Eureka Server<br/>Service Discovery]
+        Zipkin[Zipkin<br/>Distributed Tracing]
+        RabbitMQ[RabbitMQ<br/>Event Broker]
+        MySQL[(MySQL Database<br/>Per-Service Schema)]
+    end
+
+    subgraph API Gateway Layer
+        Gateway[API Gateway<br/>Port: 8080]
+    end
+
+    subgraph Microservices
+        Auth[Auth Service<br/>Port: 8081]
+        App[Application Service<br/>Port: 8082]
+        Doc[Document Service<br/>Port: 8083]
+        Admin[Admin Service<br/>Port: 8084]
+    end
+    
+    subgraph External Systems
+        Dropbox[Dropbox API<br/>Cloud Storage]
+    end
+
+    React -->|REST Calls| Gateway
+    
+    Gateway -->|Routes| Auth
+    Gateway -->|Routes| App
+    Gateway -->|Routes| Doc
+    Gateway -->|Routes| Admin
+    
+    Auth -->|Read/Write| MySQL
+    App -->|Read/Write| MySQL
+    Doc -->|Read/Write| MySQL
+    Admin -->|Read/Write| MySQL
+    
+    Doc -->|Upload/Download| Dropbox
+    
+    App -.->|Pub/Sub Events| RabbitMQ
+    Doc -.->|Pub/Sub Events| RabbitMQ
+    
+    Gateway -.->|Registers| Eureka
+    Auth -.->|Registers| Eureka
+    App -.->|Registers| Eureka
+    Doc -.->|Registers| Eureka
+    Admin -.->|Registers| Eureka
+    
+    Gateway -.->|Traces| Zipkin
+    Auth -.->|Traces| Zipkin
+    App -.->|Traces| Zipkin
+    Doc -.->|Traces| Zipkin
+    Admin -.->|Traces| Zipkin
+```
+
+---
+
+## 2. Low Level Design (LLD) - Microservice Internal Architecture
+
+This diagram shows the internal structure of a typical microservice in this project (e.g., Application Service). It follows a standard layered architecture using Spring Boot.
+
+```mermaid
+graph LR
+    subgraph Typical Microservice Architecture
+        direction TB
+        C[Controller Layer<br/>Handles HTTP & Routing]
+        S[Service Layer<br/>Business & Transaction Logic]
+        R[Repository Layer<br/>Spring Data JPA]
+        E[(Database)]
+        
+        M[Mapper / DTOs<br/>Data Transformation]
+    end
+    
+    ClientRequest[HTTP Request] --> C
+    C -->|Uses| M
+    C -->|Invokes| S
+    S -->|Invokes| R
+    R -->|SQL Queries| E
+    
+    E -.->|Entity Data| R
+    R -.->|Entity Data| S
+    S -.->|DTO| C
+    C -.->|HTTP Response| ClientResponse[HTTP Response]
+```
+
+---
+
+## 3. Flow Diagram - Loan Application Submission & Document Upload
+
+This sequence diagram illustrates the workflow of a user submitting a loan application and subsequently uploading supporting documents.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Client as React Frontend
+    participant Gateway as API Gateway
+    participant Auth as Auth Service
+    participant App as Application Service
+    participant Doc as Document Service
+    participant DB as MySQL DB
+    participant Dropbox as Dropbox API
+
+    Note over Client,Gateway: Loan Application Creation
+    Client->>Gateway: POST /api/applications (Form Data, JWT)
+    Gateway->>Auth: Validate JWT Token
+    Auth-->>Gateway: Token Valid (User ID extracted)
+    Gateway->>App: Forward Request
+    App->>DB: Save Application (Status: PENDING)
+    DB-->>App: Saved Application Entity
+    App-->>Gateway: 201 Created (Application ID)
+    Gateway-->>Client: Application Created Success
+
+    Note over Client,Gateway: Document Upload
+    Client->>Gateway: POST /api/documents (App ID, File, JWT)
+    Gateway->>Auth: Validate JWT Token
+    Auth-->>Gateway: Token Valid
+    Gateway->>Doc: Forward Request (Multipart File)
+    Doc->>Dropbox: Upload File via DbxClientV2
+    Dropbox-->>Doc: File Metadata & Shareable Link
+    Doc->>DB: Save Document Record (URL, App ID)
+    DB-->>Doc: Saved Document Entity
+    Doc-->>Gateway: 201 Created (Document Info)
+    Gateway-->>Client: Document Upload Success
+```
+
+---
+
+## 4. Admin Dashboard Data Aggregation Flow
+
+This diagram shows how the Admin service fetches data from various services to present a unified dashboard.
+
+```mermaid
+sequenceDiagram
+    participant AdminApp as Admin React Frontend
+    participant Gateway as API Gateway
+    participant AdminSvc as Admin Service
+    participant AppSvc as Application Service
+    participant AuthSvc as Auth Service
+
+    AdminApp->>Gateway: GET /api/admin/dashboard (Admin JWT)
+    Gateway->>AdminSvc: Forward Request
+    
+    par Parallel Data Fetching
+        AdminSvc->>AppSvc: GET /api/applications/stats
+        AppSvc-->>AdminSvc: Return Application Statistics
+    and
+        AdminSvc->>AuthSvc: GET /api/users/stats
+        AuthSvc-->>AdminSvc: Return User Statistics
+    end
+    
+    AdminSvc->>AdminSvc: Aggregate Stats (Total Users, Loans, etc.)
+    AdminSvc-->>Gateway: Combined Dashboard DTO
+    Gateway-->>AdminApp: 200 OK Dashboard Data
+```

@@ -1,0 +1,497 @@
+/* App.css — Simple, clean styles for FinFlow */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .brand {
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.navbar .nav-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navbar .nav-links a:hover {
+  color: #fff;
+}
+
+.navbar .nav-links button {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.navbar .nav-links button:hover {
+  background: #c73650;
+}
+
+/* ---------- Page Container ---------- */
+
+.page {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.page h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* ---------- Forms ---------- */
+
+.form-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form-card h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background: #16213e;
+}
+
+.btn-danger {
+  background: #e94560;
+}
+
+.btn-danger:hover {
+  background: #c73650;
+}
+
+.btn-success {
+  background: #2ecc71;
+}
+
+.btn-success:hover {
+  background: #27ae60;
+}
+
+.btn-small {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+/* ---------- Tables ---------- */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.data-table th {
+  background: #1a1a2e;
+  color: #fff;
+  font-weight: bold;
+}
+
+.data-table tr:hover {
+  background: #f9f9f9;
+}
+
+/* ---------- Status Badges ---------- */
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.badge-DRAFT { background: #95a5a6; }
+.badge-SUBMITTED { background: #3498db; }
+.badge-DOCS_PENDING { background: #f39c12; }
+.badge-DOCS_VERIFIED { background: #1abc9c; }
+.badge-UNDER_REVIEW { background: #9b59b6; }
+.badge-APPROVED { background: #2ecc71; }
+.badge-REJECTED { background: #e74c3c; }
+.badge-CLOSED { background: #7f8c8d; }
+.badge-PENDING { background: #f39c12; }
+.badge-UPLOADED { background: #3498db; }
+.badge-VERIFIED { background: #2ecc71; }
+
+/* ---------- Cards ---------- */
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+/* ---------- Stats Grid ---------- */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.stat-card .stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1a1a2e;
+}
+
+.stat-card .stat-label {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* ---------- Messages ---------- */
+
+.error-msg {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.success-msg {
+  color: #2ecc71;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.info-msg {
+  color: #888;
+  font-size: 14px;
+}
+
+/* ---------- Detail Page ---------- */
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.detail-grid .detail-item {
+  font-size: 14px;
+}
+
+.detail-grid .detail-label {
+  font-weight: bold;
+  color: #888;
+  font-size: 12px;
+}
+
+/* ---------- Misc ---------- */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.link-btn {
+  color: #1a1a2e;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mb-10 { margin-bottom: 10px; }
+.mb-20 { margin-bottom: 20px; }
+
+/* ---------- Edit Grid ---------- */
+
+.edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* ---------- Document Detail Panel ---------- */
+
+.doc-detail-panel {
+  background: #f9f9f9;
+  padding: 14px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+/* ---------- Landing Page ---------- */
+
+.landing-hero {
+  background: #1a1a2e;
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.landing-hero h1 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.landing-hero p {
+  font-size: 16px;
+  color: #ccc;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+.landing-hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.product-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #1a1a2e;
+}
+
+.product-desc {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.product-details {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.step-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.step-card h4 {
+  margin-bottom: 4px;
+}
+
+.step-card p {
+  font-size: 13px;
+  color: #888;
+}
+
+/* ---------- Wizard Stepper ---------- */
+
+.wizard-stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 0 10px;
+}
+
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.wizard-step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ddd;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.wizard-step.active .wizard-step-number {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.wizard-step.completed .wizard-step-number {
+  background: #2ecc71;
+  color: #fff;
+}
+
+.wizard-step-label {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+}
+
+.wizard-step.active .wizard-step-label {
+  color: #1a1a2e;
+  font-weight: bold;
+}
+
+.wizard-step.completed .wizard-step-label {
+  color: #2ecc71;
+}
+
+.wizard-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.review-section h4 {
+  font-size: 14px;
+  color: #1a1a2e;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+}
+
+.review-section h4:first-child {
+  margin-top: 0;
+}
