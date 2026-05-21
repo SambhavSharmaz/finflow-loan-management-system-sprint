@@ -6,6 +6,7 @@ import com.capgemini.applicationservice.dto.ApplicationResponse;
 import com.capgemini.applicationservice.entity.LoanApplication;
 import com.capgemini.applicationservice.service.ApplicationService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,9 +42,10 @@ public class ApplicationController {
                 // ignore and fallback
             }
         }
-        return "test@gmail.com";
+        return "unknown@finflow.com";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping
     public ApiResponse<ApplicationResponse> create(
             @org.springframework.web.bind.annotation.RequestHeader(value = "Authorization", required = false) String authHeader,
@@ -54,6 +56,7 @@ public class ApplicationController {
         return new ApiResponse<>(true, "Application created successfully.", response);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/{id}/submit")
     public ApiResponse<ApplicationResponse> submit(@PathVariable Long id) {
         LoanApplication loanApplication = applicationService.submit(id);
@@ -61,6 +64,7 @@ public class ApplicationController {
         return new ApiResponse<>(true, "Application submitted.", response);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/my")
     public ApiResponse<List<ApplicationResponse>> myApps(
             @org.springframework.web.bind.annotation.RequestHeader(value = "Authorization", required = false) String authHeader) {
@@ -83,6 +87,7 @@ public class ApplicationController {
         return responses;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}/status")
     public ApiResponse<String> status(@PathVariable Long id) {
         String status = applicationService.getStatus(id).name();
@@ -94,12 +99,14 @@ public class ApplicationController {
         applicationService.updateStatus(id, status);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{id}")
     public ApiResponse<String> delete(@PathVariable Long id) {
         applicationService.delete(id);
         return new ApiResponse<>(true, "Application deleted successfully.", "Success");
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/{id}")
     public ApiResponse<ApplicationResponse> update(@PathVariable Long id, @Valid @RequestBody ApplicationRequest request) {
         LoanApplication loanApplication = applicationService.update(id, request);
@@ -107,6 +114,7 @@ public class ApplicationController {
         return new ApiResponse<>(true, "Application updated successfully.", response);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/count")
     public ApiResponse<Long> count() {
         long count = applicationService.count();
@@ -116,6 +124,7 @@ public class ApplicationController {
     private ApplicationResponse toResponse(LoanApplication loanApplication) {
         ApplicationResponse response = new ApplicationResponse();
         response.setId(loanApplication.getId());
+        response.setUserEmail(loanApplication.getUserEmail());
         response.setFullName(loanApplication.getFullName());
         response.setPhone(loanApplication.getPhone());
         response.setCompany(loanApplication.getCompany());

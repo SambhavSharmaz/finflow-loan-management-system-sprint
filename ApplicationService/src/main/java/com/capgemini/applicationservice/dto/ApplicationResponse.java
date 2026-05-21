@@ -5,6 +5,7 @@ import com.capgemini.applicationservice.entity.Status;
 public class ApplicationResponse {
 
     private Long id;
+    private String userEmail;
     private String fullName;
     private String phone;
     private String company;
@@ -20,6 +21,14 @@ public class ApplicationResponse {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getFullName() {

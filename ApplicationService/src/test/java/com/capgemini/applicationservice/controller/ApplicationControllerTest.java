@@ -60,7 +60,7 @@ class ApplicationControllerTest {
         ApplicationRequest request = createRequest();
         LoanApplication app = createLoanApplication();
 
-        when(applicationService.create(any(ApplicationRequest.class), eq("test@gmail.com")))
+        when(applicationService.create(any(ApplicationRequest.class), eq("unknown@finflow.com")))
                 .thenReturn(app);
 
         ApiResponse<ApplicationResponse> response = applicationController.create(null, request);
@@ -87,7 +87,7 @@ class ApplicationControllerTest {
     @Test
     void myApps_Success() {
         LoanApplication app = createLoanApplication();
-        when(applicationService.getMyApps("test@gmail.com")).thenReturn(List.of(app));
+        when(applicationService.getMyApps("unknown@finflow.com")).thenReturn(List.of(app));
 
         ApiResponse<List<ApplicationResponse>> response = applicationController.myApps(null);
 

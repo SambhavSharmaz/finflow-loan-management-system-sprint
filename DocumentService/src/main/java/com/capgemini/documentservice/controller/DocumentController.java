@@ -3,6 +3,7 @@ package com.capgemini.documentservice.controller;
 import com.capgemini.documentservice.dto.ApiResponse;
 import com.capgemini.documentservice.dto.DocumentResponse;
 import com.capgemini.documentservice.service.DocumentService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class DocumentController {
         this.documentService = documentService;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/upload")
     public ApiResponse<DocumentResponse> upload(
             @RequestParam Long applicationId,
@@ -34,24 +36,28 @@ public class DocumentController {
         return new ApiResponse<>(true, "Document uploaded.", response);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}/verify")
     public ApiResponse<DocumentResponse> verify(@PathVariable Long id) {
         DocumentResponse response = documentService.verify(id);
         return new ApiResponse<>(true, "Document verified.", response);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
     public ApiResponse<DocumentResponse> get(@PathVariable Long id) {
         DocumentResponse response = documentService.get(id);
         return new ApiResponse<>(true, "Document fetched.", response);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{id}")
     public ApiResponse<String> delete(@PathVariable Long id) {
         documentService.delete(id);
         return new ApiResponse<>(true, "Document deleted.", "Success");
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/application/{applicationId}")
     public ApiResponse<List<DocumentResponse>> getByApplicationId(@PathVariable Long applicationId) {
         List<DocumentResponse> responses = documentService.getByApplicationId(applicationId);

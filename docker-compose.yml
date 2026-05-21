@@ -80,6 +80,7 @@ services:
       EUREKA_SERVER_URL: http://eureka-server:9090/eureka/
       ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
       SPRING_RABBITMQ_HOST: rabbitmq
+      AUTH_JWT_SECRET: "01234567890123456789012345678901"
     ports:
       - "8082:8082"
     depends_on:
@@ -101,6 +102,7 @@ services:
       EUREKA_SERVER_URL: http://eureka-server:9090/eureka/
       ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
       SPRING_RABBITMQ_HOST: rabbitmq
+      AUTH_JWT_SECRET: "01234567890123456789012345678901"
     ports:
       - "8083:8083"
     depends_on:
@@ -119,8 +121,10 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       APPLICATION_SERVICE_URL: http://application-service:8082
+      AUTH_SERVICE_URL: http://auth-service:8081
       EUREKA_SERVER_URL: http://eureka-server:9090/eureka/
       ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
+      AUTH_JWT_SECRET: "01234567890123456789012345678901"
     ports:
       - "8084:8084"
     depends_on:

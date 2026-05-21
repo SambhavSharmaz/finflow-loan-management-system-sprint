@@ -2,11 +2,15 @@ package com.capgemini.authservice.service;
 
 import com.capgemini.authservice.dto.LoginRequest;
 import com.capgemini.authservice.dto.SignupRequest;
+import com.capgemini.authservice.dto.UserDTO;
 import com.capgemini.authservice.entity.Role;
 import com.capgemini.authservice.entity.User;
 import com.capgemini.authservice.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -40,5 +44,28 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid password.");
         }
         return user;
+    }
+
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> dtos = new ArrayList<>();
+        for (User user : users) {
+            dtos.add(new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getRole().name()));
+        }
+        return dtos;
+    }
+
+    public UserDTO updateUserRole(Long id, String role) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User not found."));
+
+        try {
+            user.setRole(Role.valueOf(role));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid role. Use ROLE_USER or ROLE_ADMIN.");
+        }
+
+        User savedUser = userRepository.save(user);
+        return new UserDTO(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), savedUser.getRole().name());
     }
 }

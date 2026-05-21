@@ -4,14 +4,21 @@ import com.capgemini.authservice.dto.ApiResponse;
 import com.capgemini.authservice.dto.AuthResponse;
 import com.capgemini.authservice.dto.LoginRequest;
 import com.capgemini.authservice.dto.SignupRequest;
+import com.capgemini.authservice.dto.UserDTO;
 import com.capgemini.authservice.entity.User;
 import com.capgemini.authservice.service.AuthService;
 import com.capgemini.authservice.util.JwtUtil;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -41,5 +48,15 @@ public class AuthController {
         AuthResponse authResponse = new AuthResponse(token, user.getRole());
         System.out.println("Login completed successfully for email: " + request.getEmail());
         return new ApiResponse<>(true, "Login completed successfully.", authResponse);
+    }
+
+    @GetMapping("/users")
+    public List<UserDTO> getAllUsers() {
+        return authService.getAllUsers();
+    }
+
+    @PutMapping("/users/{id}")
+    public UserDTO updateUser(@PathVariable Long id, @RequestParam String role) {
+        return authService.updateUserRole(id, role);
     }
 }
